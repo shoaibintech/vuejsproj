@@ -3,19 +3,13 @@
     {
       "text": "walk",
       "day": "monday 11pm ",
-      "reminder": "",
+      "reminder": true,
       "id": 3
-    },
-    {
-      "text": "learning chiniese",
-      "day": "monday 2 pm",
-      "reminder": false,
-      "id": 4
     },
     {
       "text": "new task ",
       "day": "friday",
-      "reminder": false,
+      "reminder": true,
       "id": 5
     },
     {
