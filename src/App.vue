@@ -17,6 +17,14 @@ export default {
     Footer,
     RouterView,
   },
+
+  provide: {
+    message: {
+      name: "shoaib",
+      age: "24",
+      address: "islamabad",
+    },
+  },
 };
 </script>
 

@@ -1,57 +1,127 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <main>
+    <div class="about">
+      <div>
+        <h1>Watchers in vue js</h1>
+        <h2>example 1</h2>
+        <p>kilometer to meter conversion and viceversa</p>
 
-  <ul class="divide-y divide-gray-200">
-    <li v-for="person in people" :key="person.email" class="py-4 flex">
-      <img class="h-10 w-10 rounded-full" :src="person.image" alt="" />
-      <div class="ml-3">
-        helloooooooooooooo
-        <p class="text-sm font-medium text-gray-900">{{ person.name }}</p>
-        <p class="text-sm text-gray-500">{{ person.email }}</p>
+        <div id="watchersWrapper">
+          Kilometers : <input type="text" v-model="kilometers" /> Meters :
+          <input type="text" v-model="meters" />
+        </div>
+
+        <h2>example 2</h2>
+        <p>double the number</p>
+
+        input a number<input type="text" v-model="input" @change="multiply" />
+
+        number {{ input }} x 2 = {{ result }}
       </div>
-    </li>
-  </ul>
+      <div>
+        <h1>bindings in vue js</h1>
+
+        <div>
+          <h2 v-bind:class="{ active: isActive, error: hasError }">
+            click button to turn background-color to yellow
+          </h2>
+
+          <button @click="changeBG">Change Background Color</button>
+        </div>
+      </div>
+
+      <div>
+        <h1>modifiers in Vue</h1>
+        <div>
+          Number modifier allows to only enter numbers. It will not take any
+          other input besides numbers.
+
+          <span style="font-size: 25px">Enter Age:</span>
+          <input v-model.number="age" type="number" />
+        </div>
+
+        <div>
+          Lazy modifier will display the content present in the textbox once it
+          is fully entered and the user leaves the textbox.
+
+          <span style="font-size: 25px">Enter Message:</span>
+          <input v-model.lazy="msg" />
+        </div>
+        <div>
+          Trim modifier will remove any spaces entered at the start and at the
+          end.
+
+          <span style="font-size: 25px">Enter Message : </span
+          ><input v-model.trim="message" />
+        </div>
+      </div>
+
+      <div>
+        <h1>provide and inject</h1>
+        <p>object passed from parent : {{ message }}</p>
+      </div>
+    </div>
+  </main>
 </template>
 
 <script>
-const people = [
-  {
-    name: "Calvin Hawkins",
-    email: "calvin.hawkins@example.com",
-    image:
-      "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Kristen Ramos",
-    email: "kristen.ramos@example.com",
-    image:
-      "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Ted Fox",
-    email: "ted.fox@example.com",
-    image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-];
-
 export default {
-  setup() {
+  name: "About",
+  props: {},
+  data() {
     return {
-      people,
+      kilometers: 0,
+      meters: 0,
+      result: 0,
+      input: "",
+      isActive: true,
+      hasError: false,
     };
+  },
+
+  methods: {
+    changeBG: function () {
+      this.isActive = !this.isActive;
+    },
+  },
+  inject: ["message"],
+  watch: {
+    kilometers: function (val) {
+      this.kilometers = val;
+      this.meters = val * 1000;
+    },
+    meters: function (val) {
+      this.kilometers = val / 1000;
+      this.meters = val;
+    },
+
+    input: function (val) {
+      console.log("previous value is " + this.input);
+      console.log("input is :" + val);
+
+      this.result = 2 * val;
+    },
+    result: function (val) {
+      console.log("result is" + val);
+      this.result = val;
+    },
   },
 };
 </script>
 
+
+
 <style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+.about {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.active {
+  background-color: yellow;
+}
+.error {
+  background-color: red;
 }
 </style>

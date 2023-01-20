@@ -1,12 +1,6 @@
 {
   "tasks": [
     {
-      "text": "walk",
-      "day": "monday 11pm ",
-      "reminder": true,
-      "id": 3
-    },
-    {
       "text": "new task ",
       "day": "friday",
       "reminder": true,
